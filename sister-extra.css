@@ -1,0 +1,110 @@
+/* ===== Sister extra animation pack: shimmer sky, petals, typed titles, hearts, butterflies, sparkles ===== */
+
+.sky-shimmer {
+  position: fixed; inset: 0; z-index: 2; pointer-events: none;
+  background: linear-gradient(115deg, rgba(255, 183, 213, .20), rgba(255, 236, 170, .16), rgba(170, 216, 255, .18), rgba(216, 180, 255, .16), rgba(255, 183, 213, .20));
+  background-size: 280% 280%;
+  mix-blend-mode: soft-light;
+  animation: skyShift 22s ease-in-out infinite alternate;
+}
+@keyframes skyShift { from { background-position: 0% 40%; } to { background-position: 100% 60%; } }
+
+/* Two typed title lines */
+.sister-titles {
+  position: fixed; top: 9vh; left: 0; width: 100%; z-index: 45; pointer-events: none;
+  text-align: center; padding: 0 12px; box-sizing: border-box;
+}
+.st-line1 {
+  margin: 0; min-height: 1.25em;
+  font-family: Georgia, 'Times New Roman', serif; font-weight: 800;
+  font-size: clamp(30px, 7.2vw, 58px); letter-spacing: .5px;
+  color: #d81b60;
+  text-shadow: 0 2px 0 #fff, 0 0 22px rgba(255, 255, 255, .95), 0 6px 24px rgba(216, 27, 96, .35);
+}
+.st-line2 {
+  margin: .18em 0 0; min-height: 1.3em;
+  font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-weight: 600;
+  font-size: clamp(16px, 3.6vw, 27px);
+  color: #7b1e4d;
+  text-shadow: 0 1px 0 #fff, 0 0 16px rgba(255, 255, 255, .95);
+}
+.st-caret::after { content: '▍'; margin-left: 2px; color: #d81b60; animation: caretBlink .8s steps(1) infinite; }
+@keyframes caretBlink { 50% { opacity: 0; } }
+
+/* Falling petals (same construction as before: fall > sway > shape) */
+.sister-petals { position: fixed; inset: 0; z-index: 30; pointer-events: none; overflow: hidden; }
+.sister-petals .petal-fall { position: absolute; top: -6vh; animation: sPetalFall linear infinite; will-change: transform; }
+.sister-petals .petal-sway { display: block; animation: sPetalSway ease-in-out infinite alternate; will-change: transform; }
+.sister-petals .petal-shape {
+  display: block;
+  background: radial-gradient(circle at 32% 30%, #ffe3ef, #f78fb8 68%, #e86a9c);
+  border-radius: 82% 6% 82% 6%;
+  box-shadow: 0 0 6px rgba(240, 130, 175, .5);
+  animation: sPetalSpin ease-in-out infinite alternate;
+}
+@keyframes sPetalFall { to { transform: translateY(112vh); } }
+@keyframes sPetalSway { from { transform: translateX(-3vw) rotate(-22deg); } to { transform: translateX(3vw) rotate(22deg); } }
+@keyframes sPetalSpin { from { transform: rotate(0deg) scale(1); } to { transform: rotate(44deg) scale(.88); } }
+
+/* Floating hearts + sparkle bursts share the fx layer */
+#sisterFx { position: fixed; inset: 0; z-index: 34; pointer-events: none; overflow: hidden; }
+.fx-heart {
+  position: absolute; bottom: -4vh; color: #ef5d93; opacity: 0;
+  text-shadow: 0 0 10px rgba(255, 255, 255, .9);
+  animation: heartRise ease-in forwards;
+}
+@keyframes heartRise {
+  0% { transform: translateY(0) translateX(0) scale(.7) rotate(-6deg); opacity: 0; }
+  10% { opacity: .95; }
+  50% { transform: translateY(-55vh) translateX(2.5vw) scale(1.05) rotate(6deg); }
+  100% { transform: translateY(-108vh) translateX(-1.5vw) scale(1.15) rotate(-5deg); opacity: 0; }
+}
+.fx-spark {
+  position: absolute; color: #ffb703; opacity: 0;
+  text-shadow: 0 0 12px rgba(255, 214, 90, .95), 0 0 4px #fff;
+  animation: sparkPop ease-out forwards;
+}
+@keyframes sparkPop {
+  0% { transform: translate(0, 0) scale(.4) rotate(0deg); opacity: 0; }
+  18% { opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)) scale(1.25) rotate(120deg); opacity: 0; }
+}
+
+/* Butterflies: two wings flapping + a looping flight path */
+.butterfly { position: fixed; z-index: 32; width: 34px; height: 26px; pointer-events: none; opacity: 0; }
+.butterfly .wing {
+  position: absolute; top: 0; width: 16px; height: 24px;
+  border-radius: 80% 10% 80% 10%;
+  background: radial-gradient(circle at 30% 30%, #ffe08a, #ff9d5c 60%, #e86a92);
+  box-shadow: inset 0 0 4px rgba(255, 255, 255, .7);
+  transform-origin: right center;
+}
+.butterfly .w1 { left: 1px; animation: flapL .34s ease-in-out infinite alternate; }
+.butterfly .w2 { right: 1px; transform-origin: left center; border-radius: 10% 80% 10% 80%;
+  background: radial-gradient(circle at 70% 30%, #d8b4fe, #a78bfa 55%, #7c5cd6); animation: flapR .34s ease-in-out infinite alternate; }
+@keyframes flapL { from { transform: rotateY(12deg) rotate(-14deg); } to { transform: rotateY(64deg) rotate(-4deg); } }
+@keyframes flapR { from { transform: rotateY(-12deg) rotate(14deg); } to { transform: rotateY(-64deg) rotate(4deg); } }
+.butterfly.bf1 { animation: fly1 26s linear infinite; animation-delay: 5s; }
+.butterfly.bf2 { animation: fly2 32s linear infinite; animation-delay: 14s; transform: scale(.75); }
+@keyframes fly1 {
+  0% { left: -6vw; top: 68vh; opacity: 0; }
+  6% { opacity: 1; }
+  25% { left: 22vw; top: 46vh; }
+  50% { left: 48vw; top: 62vh; }
+  75% { left: 74vw; top: 40vh; }
+  94% { opacity: 1; }
+  100% { left: 104vw; top: 54vh; opacity: 0; }
+}
+@keyframes fly2 {
+  0% { left: 104vw; top: 30vh; opacity: 0; }
+  6% { opacity: 1; }
+  30% { left: 72vw; top: 52vh; }
+  55% { left: 44vw; top: 34vh; }
+  80% { left: 16vw; top: 50vh; }
+  94% { opacity: 1; }
+  100% { left: -6vw; top: 38vh; opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sky-shimmer, .butterfly, .sister-petals .petal-fall, .sister-petals .petal-sway, .sister-petals .petal-shape { animation: none !important; }
+}
