@@ -270,3 +270,11 @@ h1 { margin: 0; font-size: clamp(28px, 3.4vw, 42px); line-height: 1.08; letter-s
 
 .album-lightbox { touch-action: none; }
 .album-lightbox img { -webkit-user-drag: none; user-select: none; -webkit-user-select: none; }
+
+/* Friend edition: cards 5-7 in the stack/spread */
+.album-card:nth-child(5) { z-index: 0; transform: translate(-6px, -18px) rotate(-5deg); }
+.album-card:nth-child(6) { z-index: 0; transform: translate(14px, -4px) rotate(6deg); }
+.album-card:nth-child(7) { z-index: 0; transform: translate(-14px, -8px) rotate(-7deg); }
+.memory-album.is-spread .album-card:nth-child(5) { --photo-angle: -3deg; animation-delay: .52s; }
+.memory-album.is-spread .album-card:nth-child(6) { --photo-angle: 2.5deg; animation-delay: .65s; }
+.memory-album.is-spread .album-card:nth-child(7) { --photo-angle: -2deg; animation-delay: .78s; }
