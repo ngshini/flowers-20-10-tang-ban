@@ -190,6 +190,7 @@
       document.addEventListener('pointerdown', () => { if (!on) play(); }, { once: true });
       toggle.addEventListener('click', () => { if (on) { stop(); } else { play(); } });
       reflect();
+      play(); // Mặc định mở nhạc: phát ngay khi mở trang (nếu trình duyệt chặn, lần chạm đầu tiên sẽ phát).
     })();
   </script>
 </body>

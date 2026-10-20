@@ -570,8 +570,10 @@
       function play() { music.play().then(() => { on = true; toggle.hidden = false; fadeTo(0.45); reflect(); }).catch(() => {}); }
       function stop() { on = false; fadeTo(0, () => music.pause()); reflect(); }
       document.getElementById('bloom').addEventListener('click', () => { if (!on) play(); });
+      document.addEventListener('pointerdown', () => { if (!on) play(); }, { once: true });
       toggle.addEventListener('click', () => { if (on) { stop(); } else { play(); } });
       reflect();
+      play(); // Mặc định mở nhạc: phát ngay khi mở trang (nếu trình duyệt chặn, lần chạm đầu tiên sẽ phát).
     })();
   </script>
 
